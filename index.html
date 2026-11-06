@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angel Forn | Servidores de Discord</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --card-bg: #f8fafc;
+      --accent: #0284c7;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text);
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 { color: var(--accent); margin-bottom: 5px; font-size: 2rem; }
+    p { color: var(--text-muted); }
+    
+    .container {
+      width: 100%;
+      max-width: 450px;
+    }
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border: 1px solid var(--border);
+    }
+    .card h3 { margin-top: 0; color: var(--text); }
+    .preco-info {
+      color: #0284c7;
+      font-weight: bold;
+      margin: 10px 0 15px 0;
+      font-size: 0.95rem;
+    }
+    .btn {
+      background-color: #0284c7;
+      color: #ffffff;
+      border: none;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn:hover { background-color: #0369a1; }
+    
+    /* Estilo da Janela de Aviso (Modal) */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .modal-content {
+      background-color: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: fadeIn 0.3s ease;
+    }
+    .aviso-texto {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #334155;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      text-align: left;
+    }
+    .contato-linha {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      background: #f8fafc;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: #0f172a;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contato-linha:hover {
+      background: #f1f5f9;
+    }
+    .contato-linha span {
+      margin-left: 10px;
+      font-size: 0.95rem;
+      color: #0284c7;
+    }
+    .instrucao-final {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 15px;
+      margin-bottom: 20px;
+      line-height: 1.4;
+    }
+    .close-btn {
+      background-color: #ef4444;
+      color: white;
+      margin-top: 10px;
+    }
+    .close-btn:hover { background-color: #dc2626; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Angel Forn 🕊️</h1>
+    <p>Painel Oficial de Fornecedor</p>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h3>🚀 Servidores do Zero do Discord</h3>
+      <p>Servidores profissionais criados e estruturados sob encomenda para a sua comunidade, clã ou guilda.</p>
+      
+      <!-- Informação do preço dinâmica -->
+      <div class="preco-info">💰 Valor: Dependendo do servidor, do jeito que você quer o server.</div>
+      
+      <button class="btn" onclick="abrirModal()">Comprar</button>
+    </div>
+  </div>
+
+  <!-- Janela Pop-up de Aviso e Contato -->
+  <div id="modalAviso" class="modal">
+    <div class="modal-content">
+      <h3 style="color: #0284c7; margin-top: 0;">⚠️ Aviso Importante</h3>
+      
+      <div class="aviso-texto">
+        Para fechar o pedido, alinhar os detalhes do servidor, realizar o pagamento via Pix e receber a posse como dono, entre em contato através de um dos canais abaixo.
+      </div>
+      
+      <!-- Símbolo / Link do WhatsApp -->
+      <a id="linkWhatsapp" href="#" target="_blank" class="contato-linha">
+        <span>📱</span> <span>WhatsApp: (21) 97231-8511</span>
+      </a>
+      
+      <!-- Símbolo / Ação do Discord -->
+      <div class="contato-linha" onclick="copiarDiscord()">
+        <span>🎮</span> <span>Discord: nox.ex_sr.mello</span>
+      </div>
+
+      <!-- Texto avisando para chamar em um dos dois para adquirir -->
+      <div class="instrucao-final">
+        👉 Para adquirir, é obrigatório me chamar no <strong>WhatsApp</strong> ou no <strong>Discord</strong> para conversarmos e acertarmos tudo!
+      </div>
+      
+      <button class="btn close-btn" onclick="fecharModal()">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    const meuWhatsApp = "5521972318511";
+    const meuDiscord = "nox.ex_sr.mello";
+
+    function abrirModal() {
+      const mensagem = encodeURIComponent("Olá! Vi o site da Angel Forn e tenho interesse em encomendar um Servidor do Zero do Discord.");
+      document.getElementById('linkWhatsapp').href = `https://wa.me/${meuWhatsApp}?text=${mensagem}`;
+      document.getElementById('modalAviso').style.display = 'flex';
+    }
+
+    function fecharModal() {
+      document.getElementById('modalAviso').style.display = 'none';
+    }
+
+    function copiarDiscord() {
+      navigator.clipboard.writeText(meuDiscord);
+      alert("Nick do Discord copiado com sucesso! (nox.ex_sr.mello)");
+    }
+  </script>
+
+</body>
+</html>
